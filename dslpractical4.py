@@ -78,3 +78,56 @@ if index == -1:
 
 else :
     print("\nBy binary search we got index as :" , index )
+
+
+def fibonacci_search(arr, key):
+    n = len(arr)
+    fib_m_2 = 0  
+    fib_m_1 = 1 
+    fib = fib_m_1 + fib_m_2 
+
+
+    while (fib < n):
+        fib_m_2 = fib_m_1
+        fib_m_1 = fib
+        fib = fib_m_1 + fib_m_2
+
+   
+    offset = -1
+
+   
+    while (fib > 1): 
+
+        i = min(offset + fib_m_2, n - 1)
+
+        
+        if arr[i] < key:
+            fib = fib_m_1
+            fib_m_1 = fib_m_2
+            fib_m_2 = fib - fib_m_1
+            offset = i
+
+        
+        elif arr[i] > key:
+            fib = fib_m_2
+            fib_m_1 = fib_m_1 - fib_m_2
+            fib_m_2 = fib - fib_m_1
+
+        
+        else:
+            return i
+
+   
+    if fib_m_1 and arr[offset + 1] == key:
+        return offset + 1
+
+    return -1
+
+
+index = fibonacci_search(arr, key)
+
+if index == -1:
+    print("\nElement not found using Fibonacci search")
+else:
+    print("\nBy Fibonacci search we got index as:", index)
+
