@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;  // This allows us to omit the std:: prefix
+
+int main() {
+    string filename = "example.txt";
+    string dataToWrite = "Hello, this is a test file.\nThis file contains some example text.";
+    string dataRead;
+
+    // Create and write to the file
+    ofstream outputFile(filename);
+    if (outputFile.is_open()) {
+        outputFile << dataToWrite;
+        cout << "Data written to file successfully." << endl;
+        outputFile.close();
+    } else {
+        cerr << "Error: Unable to open file for writing." << endl;
+        return 1;
+    }
+
+    // Open the file for reading
+    ifstream inputFile(filename);
+    if (inputFile.is_open()) {
+        cout << "\nReading data from file:" << endl;
+        while (getline(inputFile, dataRead)) {
+            cout << dataRead << endl;
+        }
+        inputFile.close();
+    } else {
+        cerr << "Error: Unable to open file for reading." << endl;
+        return 1;
+    }
+
+    return 0;
+}
